@@ -1,2 +1,2 @@
 Nasdaq-Data-Link==1.0.2
-hvplot=0.7.3
+hvplot.pandas=0.7.3
