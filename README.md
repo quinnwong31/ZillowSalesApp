@@ -37,11 +37,9 @@ To launch the application locally, perform the following steps:
 1. Open Terminal.
 2. Enter in the following:
 
-`streamlit run uber_pickups.py`
+`streamlit run zillow_sales.py`
 
-3. Verify that you can access the Uber Pickups application:
-
-![Uber Pickups](/images/uber_pickups.jpg)
+3. Verify that you can access the Zillow Sales application:
 
 ## Deploying the App on SteamLit
 
