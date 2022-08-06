@@ -21,7 +21,15 @@ zillow_df = merge_zillow_data(region_df, sales_df)
 master_df = merge_zillow_county_coordinate_data(
     zillow_df, county_coordinates_df)
 
-county_df = master_df.groupby(["state", "county"], as_index=False).mean()
+# Filter the data by year
+st.write(master_df.info())
+min_year = 2019
+max_year = 2022
+filtered_df = master_df[min_year < master_df['date'].dt.year]
+filtered_df = filtered_df[max_year > master_df['date'].dt.year]
+# st.write(filtered_df)
+
+county_df = filtered_df.groupby(["state", "county"], as_index=False).mean()
 
 # Divide price by 1000 so that it looks better on map.
 county_df["value"] = county_df["value"] / 1000

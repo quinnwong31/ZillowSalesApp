@@ -1,3 +1,4 @@
+from datetime import date
 import streamlit as st
 import pandas as pd
 import numpy as np
@@ -7,6 +8,7 @@ import requests
 from pathlib import Path
 import shutil
 import hvplot.pandas
+import datetime
 
 
 def get_regions(regions):
@@ -41,7 +43,7 @@ def load_zillow_sales_data(nrows, region_df):
     # A function to load and clean Zillow sales data
     # Reading in Database
     zillow_data = pd.read_csv(
-        Path('./data/zillow_sales.csv')
+        Path('./data/zillow_sales.csv', parse_dates=['date'])
     )
 
     # Merge the Region dataframe with the Zillow sales data
@@ -112,16 +114,15 @@ def merge_zillow_data(region_df, sales_df):
 
 def merge_zillow_county_coordinate_data(zillow_df, county_coordinates_df):
     # Merge Zillow data with county coordinates
-
-    print(zillow_df.dtypes)
-    # print(county_coordinates_df.dtypes)
-    # county_coordinates_df.columns.dtype
+    # print(zillow_df.dtypes)
 
     # Merge the Zillow data and county coordinates data.
     master_df = pd.merge(
         zillow_df,
         county_coordinates_df,
         on=['state', 'county'])
+
+    master_df["date"] = pd.to_datetime(master_df["date"])
 
     # Check the master data
     return master_df
